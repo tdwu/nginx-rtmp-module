@@ -126,7 +126,7 @@ else
     NGX_ADDON_DEPS="$NGX_ADDON_DEPS $RTMP_DEPS"
     NGX_ADDON_SRCS="$NGX_ADDON_SRCS $RTMP_CORE_SRCS $RTMP_HTTP_SRCS"
 
-    CFLAGS="$CFLAGS -I$ngx_addon_dir  –Wno-unused-but-set-variable"
+    CFLAGS="$CFLAGS -I$ngx_addon_dir"
 fi
 
 USE_OPENSSL=YES

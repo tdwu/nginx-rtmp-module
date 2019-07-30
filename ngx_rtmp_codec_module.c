@@ -554,7 +554,7 @@ static void
 ngx_rtmp_codec_parse_hevc_header(ngx_rtmp_session_t *s, ngx_chain_t *in)
 {
     // ngx_uint_t              profile_idc, width, height ;
-    ngx_uint_t nal_type;
+    //ngx_uint_t nal_type;
     ngx_uint_t              i, j, narrs,  nnal, nnall;
     ngx_rtmp_codec_ctx_t   *ctx;
     ngx_rtmp_bit_reader_t   br;
@@ -617,9 +617,9 @@ ngx_rtmp_codec_parse_hevc_header(ngx_rtmp_session_t *s, ngx_chain_t *in)
     //parse vps sps pps ..
     for ( j = 0; j < narrs; j++) {
         //bit(1) array_completeness;
-        nal_type = (ngx_uint_t)ngx_rtmp_bit_read_8(&br) & 0x3f;
+       // nal_type = (ngx_uint_t)ngx_rtmp_bit_read_8(&br) & 0x3f;
         nnal = (ngx_uint_t)ngx_rtmp_bit_read_16(&br);
-        ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "codec: hevc nal_type=%ui nnal=%ui", nal_type, nnal);
+        ngx_log_debug2(NGX_LOG_DEBUG_RTMP, s->connection->log, 0, "codec: hevc nal_type=%ui nnal=%ui",  (ngx_uint_t)ngx_rtmp_bit_read_8(&br) & 0x3f, nnal);
         for (i = 0; i < nnal; i++) {
             nnall = (ngx_uint_t)ngx_rtmp_bit_read_16(&br);
             ngx_rtmp_bit_read(&br, nnall*8);
